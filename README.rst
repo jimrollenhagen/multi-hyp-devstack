@@ -18,8 +18,10 @@ Goal status: works on newton and newer.
 Usage
 =====
 
-# initial stack user setup via root access
-ansible-playbook -i inventory.yml -u root stack-user.yaml
+initial stack user setup via root access::
 
-# do the rest
-ansible-playbook -i inventory.yml -u stack main.yml
+  ansible-playbook -i inventory.yml -u root stack-user.yaml
+
+do the rest::
+
+  ansible-playbook -i inventory.yml -u stack main.yml
