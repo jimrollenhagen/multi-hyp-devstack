@@ -1,0 +1,8 @@
+[controller]
+controller.devstack.jroll.io
+
+[ironic]
+ironic.devstack.jroll.io
+
+[virt]
+virt.devstack.jroll.io

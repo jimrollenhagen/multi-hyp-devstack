@@ -1,0 +1,45 @@
+---
+- name: Install deps for apt module
+  shell: apt-get update && apt-get install -y python-apt aptitude
+  become: true
+
+- name: Update system
+  apt:
+    upgrade: yes
+    update_cache: yes
+  become: true
+
+- name: Reboot system if required
+  shell: sleep 2 && /sbin/shutdown -r now 'Rebooting to complete system upgrade'
+  args:
+    removes: /var/run/reboot-required
+  become: yes
+  async: 1
+  poll: 0
+  ignore_errors: true
+  register: reboot
+
+- name: Wait for system to return from reboot
+  local_action: wait_for
+  args:
+    host: "{{ inventory_hostname }}"
+    state: started
+    port: 22
+    delay: 1
+    timeout: 300
+
+- name: Install some basic packages (git, vim)
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - vim
+  become: true
+
+# TODO(jroll) make version a variable
+- name: Clone devstack
+  git:
+    repo: git://git.openstack.org/openstack-dev/devstack.git
+    dest: /opt/stack/devstack
+    version: master

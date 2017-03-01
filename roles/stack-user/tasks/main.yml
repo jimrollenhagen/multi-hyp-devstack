@@ -1,0 +1,26 @@
+---
+- name: Create stack group
+  group:
+    name: stack
+    state: present
+
+- name: Create stack user
+  user:
+    name: stack
+    home: /opt/stack
+    group: stack
+    shell: /bin/bash
+
+- name: Give stack user passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^stack'
+    line: 'stack ALL=(ALL) NOPASSWD:ALL'
+    validate: visudo -cf %s
+
+- name: Set up authorized keys for stack user
+  authorized_key:
+    user: stack
+    state: present
+    key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}"
