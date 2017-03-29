@@ -1,8 +1,8 @@
 [controller]
-controller.devstack.jroll.io
+controller.cloud.jroll.io
 
 [ironic]
-ironic.devstack.jroll.io
+metalhost.cloud.jroll.io
 
 [virt]
-virt.devstack.jroll.io
+virthost.cloud.jroll.io

@@ -1,0 +1,21 @@
+- name: Destroy VMs
+  os_server:
+    cloud: "{{ cloud }}"
+    state: absent
+    name: "{{ item }}"
+  with_items:
+    - "{{ controller_hostname }}"
+    - "{{ virthost_hostname }}"
+    - "{{ metalhost_hostname }}"
+
+- name: Destroy subnet for private network
+  os_subnet:
+    cloud: "{{ cloud }}"
+    state: absent
+    name: cloud-subnet
+
+- name: Destroy private network
+  os_network:
+    cloud: "{{ cloud }}"
+    state: absent
+    name: "{{ lan_name }}"

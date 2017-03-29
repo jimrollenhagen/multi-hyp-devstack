@@ -13,16 +13,30 @@ we can test behaviors in this and similar configurations.
 Current status: WIP, moving quickly.
 Goal status: works on newton and newer.
 
-Assumes VMs on Rackspace public cloud with publicnet and servicenet.
+Assumes an account on Rackspace public cloud, with credentials configured
+in a clouds.yaml file.
 
 Usage
 =====
 
-initial stack user setup via root access::
+Copy `secrets.yml.example` to `secrets.yml` and edit as necessary.
+
+Ensure `shade` and `rackspaceauth` python packages are installed (and ansible,
+of course).
+
+Build the machines::
+
+  ansible-playbook -i inventory.yml build.yml
+
+Destroy machines and private network::
+
+  ansible-playbook -i inventory.yml destroy.yml
+
+Initial stack user setup via root access::
 
   ansible-playbook -i inventory.yml -u root stack-user.yaml
 
-do the rest::
+Run devstack to do all the things::
 
   ansible-playbook -i inventory.yml -u stack main.yml
 
