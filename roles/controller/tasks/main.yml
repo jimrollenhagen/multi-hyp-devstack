@@ -1,0 +1,8 @@
+---
+- name: Drop in local.conf
+  template:
+    src: local.conf
+    dest: /opt/stack/devstack/local.conf
+
+- name: Run devstack
+  shell: /opt/stack/devstack/stack.sh

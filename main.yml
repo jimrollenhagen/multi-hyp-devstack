@@ -2,3 +2,23 @@
 - hosts: all
   roles:
     - common
+  vars_files:
+    - secrets.yml
+
+- hosts: controller
+  roles:
+    - controller
+  vars_files:
+    - secrets.yml
+
+- hosts: virt
+  roles:
+    - virt
+  vars_files:
+    - secrets.yml
+
+- hosts: ironic
+  roles:
+    - ironic
+  vars_files:
+    - secrets.yml
