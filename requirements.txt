@@ -1,3 +1,4 @@
 ansible
 pyrax
 shade
+dnspython
