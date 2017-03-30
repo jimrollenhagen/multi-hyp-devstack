@@ -28,13 +28,26 @@
     delay: 1
     timeout: 300
 
-- name: Install some basic packages (git, vim)
+- name: Install some basic packages
   apt:
     name: "{{ item }}"
     state: present
   with_items:
     - git
     - vim
+    - python-pip
+  become: true
+
+- name: Install some basic pypi packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - pip
+    - git-review
+    - pbr
+    - tox
+    - virtualenv
   become: true
 
 # TODO(jroll) make version a variable
@@ -43,3 +56,10 @@
     repo: git://git.openstack.org/openstack-dev/devstack.git
     dest: /opt/stack/devstack
     version: master
+
+- name: Copy up git configs
+  copy:
+    src: "{{ lookup('env', 'HOME') + '/.gitconfig' }}"
+    dest: /opt/stack/.gitconfig
+    owner: stack
+    group: stack

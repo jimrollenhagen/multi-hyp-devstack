@@ -4,5 +4,16 @@
     src: local.conf
     dest: /opt/stack/devstack/local.conf
 
+- name: fetch ironic repo
+  git:
+    repo: git://git.openstack.org/openstack/ironic.git
+    dest: /opt/stack/ironic
+    version: master
+
+- name: check out hacked up ironic devstack plugin
+  shell: git review -d 440775
+  args:
+    chdir: /opt/stack/ironic
+
 - name: Run devstack
   shell: /opt/stack/devstack/stack.sh
