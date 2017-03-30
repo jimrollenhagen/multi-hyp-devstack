@@ -64,7 +64,7 @@
   rax_dns_record:
     credentials: "{{ pyrax_creds_file }}"
     domain: "{{ base_domain }}"
-    name: "{{ controller_hostname }}"
+    name: "{{ controller_internal_hostname }}"
     data: "{{ controller_host.openstack.networks[lan_name][0] }}"
     type: A
   register: a_record
@@ -97,7 +97,7 @@
   rax_dns_record:
     credentials: "{{ pyrax_creds_file }}"
     domain: "{{ base_domain }}"
-    name: "{{ virthost_hostname }}"
+    name: "{{ virthost_internal_hostname }}"
     data: "{{ virt_host.openstack.networks[lan_name][0] }}"
     type: A
   register: a_record
@@ -130,7 +130,7 @@
   rax_dns_record:
     credentials: "{{ pyrax_creds_file }}"
     domain: "{{ base_domain }}"
-    name: "{{ metalhost_hostname }}"
+    name: "{{ metalhost_internal_hostname }}"
     data: "{{ metal_host.openstack.networks[lan_name][0] }}"
     type: A
   register: a_record
