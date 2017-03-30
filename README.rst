@@ -14,15 +14,20 @@ Current status: WIP, moving quickly.
 Goal status: works on newton and newer.
 
 Assumes an account on Rackspace public cloud, with credentials configured
-in a clouds.yaml file.
+in a clouds.yaml file *and* a pyrax configuration file. The OpenStack modules
+don't support Rackspace's DNS (because it isn't OpenStack), so we rely on the
+pyrax-based rax modules there. Also assumes a domain delegated to Rackspace's
+DNS servers, and either not associated with a Rackspace cloud account, or
+already associated with the cloud account configured for pyrax.
 
 Usage
 =====
 
 Copy `secrets.yml.example` to `secrets.yml` and edit as necessary.
 
-Ensure `shade` and `rackspaceauth` python packages are installed (and ansible,
-of course).
+Install the items in `requirements.txt`::
+
+  pip install --upgrade -r requirements.txt
 
 Build the machines::
 
@@ -45,7 +50,6 @@ TODO
 
 * Disable root SSH ASAP
 * Change root password ASAP
-* Dynamically find IPs
 * Support private networks (and don't listen on non-private networks)
   * will need something on publicnet for UI/API
 * Don't expose my inventory file, I guess
