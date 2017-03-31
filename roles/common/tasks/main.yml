@@ -57,6 +57,11 @@
     dest: /opt/stack/devstack
     version: master
 
+- name: add gerrit host keys
+  template:
+    src: known_hosts
+    dest: /opt/stack/.ssh/known_hosts
+
 - name: Copy up git configs
   copy:
     src: "{{ lookup('env', 'HOME') + '/.gitconfig' }}"
