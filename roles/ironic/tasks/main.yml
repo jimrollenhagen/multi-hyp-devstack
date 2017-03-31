@@ -10,6 +10,8 @@
     dest: /opt/stack/ironic
     version: master
 
+# TODO(jroll) accept gerrit host keys
+# TODO(jroll) cherry-pick this maybe?
 - name: check out hacked up ironic devstack plugin
   shell: git review -d 440775
   args:
