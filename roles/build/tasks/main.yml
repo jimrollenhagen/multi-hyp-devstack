@@ -58,7 +58,7 @@
     name: "{{ controller_hostname }}"
     data: "{{ controller_host.openstack.public_v4 }}"
     type: A
-  register: a_record
+    ttl: 300
 
 - name: Register controller private DNS
   rax_dns_record:
@@ -67,7 +67,7 @@
     name: "{{ controller_internal_hostname }}"
     data: "{{ controller_host.openstack.networks[lan_name][0] }}"
     type: A
-  register: a_record
+    ttl: 300
 
 - name: Build virt host VM
   os_server:
@@ -91,7 +91,7 @@
     name: "{{ virthost_hostname }}"
     data: "{{ virt_host.openstack.public_v4 }}"
     type: A
-  register: a_record
+    ttl: 300
 
 - name: Register virt host private DNS
   rax_dns_record:
@@ -100,7 +100,7 @@
     name: "{{ virthost_internal_hostname }}"
     data: "{{ virt_host.openstack.networks[lan_name][0] }}"
     type: A
-  register: a_record
+    ttl: 300
 
 - name: Build metal host VM
   os_server:
@@ -124,7 +124,7 @@
     name: "{{ metalhost_hostname }}"
     data: "{{ metal_host.openstack.public_v4 }}"
     type: A
-  register: a_record
+    ttl: 300
 
 - name: Register metal host private DNS
   rax_dns_record:
@@ -133,4 +133,4 @@
     name: "{{ metalhost_internal_hostname }}"
     data: "{{ metal_host.openstack.networks[lan_name][0] }}"
     type: A
-  register: a_record
+    ttl: 300
